@@ -1,5 +1,9 @@
 package com.rocketseat.certification_NLW.modules.students.controllers;
 
+/* 
+    O Controller é responsável por receber todas as requisições do usuário 
+*/
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rocketseat.certification_NLW.modules.students.dto.VerifyHasCertificationDTO;
