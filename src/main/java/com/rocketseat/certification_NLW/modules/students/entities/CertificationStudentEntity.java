@@ -1,8 +1,19 @@
 package com.rocketseat.certification_NLW.modules.students.entities;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,12 +21,31 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name = "Certifications")
 public class CertificationStudentEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private UUID studentID;
+
+    @Column(length = 100)
     private String technology;
+
+    @Column(length = 10)
     private int grade;
+
+    @Column(name = "Student_id")
+    private UUID studentID;
+
+    @ManyToOne
+    @JoinColumn(name = "Student_id", insertable = false, updatable = false)
+    private StudentEntity studentEntity;
+
+    @OneToMany
+    @JoinColumn(name = "Answer_certification_id", insertable = false, updatable = false)
     List<AnswersCertificationsEntity> answersCertificationsEntities;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
     
 }
