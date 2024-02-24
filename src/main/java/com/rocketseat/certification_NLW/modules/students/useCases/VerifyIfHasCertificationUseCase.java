@@ -1,8 +1,10 @@
 package com.rocketseat.certification_NLW.modules.students.useCases;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rocketseat.certification_NLW.modules.students.dto.VerifyHasCertificationDTO;
+import com.rocketseat.certification_NLW.modules.students.repositories.CertificationStudentRepository;
 
 /*
     Os Services são responsáveis pela lógica de negócio da sua aplicação, 
@@ -13,8 +15,12 @@ import com.rocketseat.certification_NLW.modules.students.dto.VerifyHasCertificat
 @Service
 public class VerifyIfHasCertificationUseCase {
     
+    @Autowired
+    private CertificationStudentRepository certificationStudentRepository;
+
     public boolean execute(VerifyHasCertificationDTO dto) {
-        if (dto.getEmail().equals("nicolas.loffi@gmail.com") && dto.getTechnology().equals("Java")) {
+        var result = this.certificationStudentRepository.findByStudentEmailAndTechnology(dto.getEmail(), dto.getTechnology());
+        if (!result.isEmpty()) {
             return true;
         }
         return false;
