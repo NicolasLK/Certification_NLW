@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rocketseat.certification_NLW.modules.students.dto.StudentCertificationAnswerDTO;
 import com.rocketseat.certification_NLW.modules.students.dto.VerifyHasCertificationDTO;
+import com.rocketseat.certification_NLW.modules.students.entities.CertificationStudentEntity;
 import com.rocketseat.certification_NLW.modules.students.useCases.StudentCertificationAnswersUseCase;
 import com.rocketseat.certification_NLW.modules.students.useCases.VerifyIfHasCertificationUseCase;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -41,8 +43,15 @@ public class StudentController {
     }
 
     @PostMapping("/certification/answer")
-    public StudentCertificationAnswerDTO certificationAnswer(@RequestBody StudentCertificationAnswerDTO studentCertificationAnswerDTO) {
-        return studentCertificationAnswersUseCase.execute(studentCertificationAnswerDTO);
+    public ResponseEntity<Object> certificationAnswer(
+        @RequestBody StudentCertificationAnswerDTO studentCertificationAnswerDTO) {
+            try {
+                var result = studentCertificationAnswersUseCase.execute(studentCertificationAnswerDTO);
+                return ResponseEntity.ok().body(result);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body(e.getMessage());
+            }
+        
     }
     
 }
