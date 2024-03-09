@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rocketseat.certification_NLW.modules.students.dto.StudentCertificationAnswerDTO;
 import com.rocketseat.certification_NLW.modules.students.dto.VerifyHasCertificationDTO;
-import com.rocketseat.certification_NLW.modules.students.entities.CertificationStudentEntity;
 import com.rocketseat.certification_NLW.modules.students.useCases.StudentCertificationAnswersUseCase;
 import com.rocketseat.certification_NLW.modules.students.useCases.VerifyIfHasCertificationUseCase;
 
